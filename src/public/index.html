@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Diagram System</title>
+    <link rel="stylesheet" href="css/lightTheme.css" id="themeStylesheet">
+    <script src="js/diagramRenderer.js" defer></script>
+    <script src="js/interactionHandlers.js" defer></script>
+    <script src="js/zoomController.js" defer></script>
+</head>
+<body>
+    <div id="settingsPanel"></div>
+    <div id="diagramContainer"></div>
+    <div id="menuContainer"></div>
+    <script>
+        // Theme switching functionality
+        const themeSwitcher = document.createElement('select');
+        themeSwitcher.innerHTML = `
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+            <option value="high-contrast">High Contrast Mode</option>
+        `;
+        themeSwitcher.addEventListener('change', (event) => {
+            const theme = event.target.value;
+            document.getElementById('themeStylesheet').href = `css/${theme}Theme.css`;
+        });
+        document.body.appendChild(themeSwitcher);
+    </script>
+</body>
+</html>

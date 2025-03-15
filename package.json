@@ -1,0 +1,41 @@
+{
+  "name": "markdown-diagram-system",
+  "version": "1.0.0",
+  "description": "A dynamic diagram system that generates diagrams based on interlinking Markdown files within a wiki.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "markdown-it": "^12.0.6",
+    "socket.io": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "d3": "^7.8.5",
+    "react-flow-renderer": "^10.3.17",
+    "unified": "^10.1.2",
+    "remark-parse": "^10.0.1",
+    "remark-frontmatter": "^4.0.1",
+    "localforage": "^1.10.0",
+    "styled-components": "^5.3.11",
+    "react-colorful": "^5.6.1",
+    "framer-motion": "^10.12.16",
+    "react-zoom-pan-pinch": "^3.0.7",
+    "@use-gesture/react": "^10.2.26"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.7"
+  },
+  "keywords": [
+    "markdown",
+    "diagram",
+    "wiki",
+    "nodejs"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
