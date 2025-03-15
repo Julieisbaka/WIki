@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run wiki validation only if wiki files are changed
+if git diff --cached --name-only | grep -q "^wiki/.*\.md$"; then
+  npm run validate-wiki
+fi
