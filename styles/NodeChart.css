@@ -1,0 +1,45 @@
+.node-details-panel {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.navigate-button {
+  width: 100%;
+  padding: 10px;
+  background: #69b3a2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.links-section {
+  margin-top: 20px;
+}
+
+.links-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.links-section li {
+  padding: 5px 0;
+  color: #666;
+}
