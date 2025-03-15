@@ -43,3 +43,73 @@
   padding: 5px 0;
   color: #666;
 }
+
+.node-chart {
+  background-color: var(--bg-primary);
+}
+
+.node-group {
+  cursor: pointer;
+  outline: none;
+}
+
+.node-group:focus .node {
+  stroke: var(--accent-color);
+  stroke-width: 2px;
+}
+
+.node.selected {
+  stroke: var(--accent-color);
+  stroke-width: 2px;
+}
+
+.node-label {
+  font-size: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.node-tooltip {
+  position: absolute;
+  padding: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 4px;
+  pointer-events: none;
+  max-width: 200px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.chart-loading,
+.chart-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.chart-error {
+  color: #e74c3c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node-tooltip {
+    transition: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .node {
+    forced-color-adjust: none;
+    fill: CanvasText;
+  }
+  
+  .node-link {
+    forced-color-adjust: none;
+    stroke: CanvasText;
+  }
+}

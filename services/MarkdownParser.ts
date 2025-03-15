@@ -1,19 +1,23 @@
-import { readFile, readdir } from 'fs/promises';
-import { join } from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
+import { promisify } from 'util';
 import { NodeData } from '../types/NodeTypes';
+
+const readFileAsync = promisify(fs.readFile);
+const readdirAsync = promisify(fs.readdir);
 
 export class MarkdownParser {
   private static linkRegex = /\[(.*?)\]\((.*?)\)/g;
 
   static async parseDirectory(directoryPath: string): Promise<NodeData[]> {
-    const files = await readdir(directoryPath);
-    const markdownFiles = files.filter(file => file.endsWith('.md'));
+    const files = await readdirAsync(directoryPath);
+    const markdownFiles = files.filter((file: string) => file.endsWith('.md'));
     
     const nodes: NodeData[] = [];
     
     for (const file of markdownFiles) {
-      const filePath = join(directoryPath, file);
-      const content = await readFile(filePath, 'utf-8');
+      const filePath = path.join(directoryPath, file);
+      const content = await readFileAsync(filePath, 'utf-8');
       
       const links = Array.from(content.matchAll(this.linkRegex))
         .map(match => match[2])
