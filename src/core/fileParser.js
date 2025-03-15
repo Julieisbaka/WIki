@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const processMarkdown = require('./markdownProcessor');
 
 /**
  * Parses a Markdown file to extract links and content.
@@ -7,9 +8,20 @@ const path = require('path');
  * @returns {Promise<Object>} - A promise that resolves to an object containing the content and links.
  */
 async function parseMarkdownFile(filePath) {
-    const content = await readFile(filePath);
-    const links = extractLinks(content);
-    return { content, links };
+    try {
+        const content = await readFile(filePath);
+        const parsedData = processMarkdown(content);
+        return {
+            id: path.basename(filePath, '.md'),
+            content: content,
+            ...parsedData,
+            path: filePath,
+            lastModified: fs.statSync(filePath).mtime
+        };
+    } catch (error) {
+        console.error(`Error parsing file ${filePath}:`, error);
+        return null;
+    }
 }
 
 /**

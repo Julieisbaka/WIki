@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { parseMarkdownFile } = require('../core/fileParser');
 
 // Function to fetch wiki data based on the provided node name
 const fetchWikiData = (nodeName) => {
@@ -36,9 +37,39 @@ const getNodeDetails = async (nodeName) => {
     }
 };
 
-// Exporting the functions for use in other parts of the application
-module.exports = {
-    fetchWikiData,
-    extractLinksFromMarkdown,
-    getNodeDetails,
+const wikiService = {
+    async getAllNodes() {
+        const wikiDir = path.join(__dirname, '../../wiki');
+        const files = await fs.promises.readdir(wikiDir);
+        const markdownFiles = files.filter(file => file.endsWith('.md'));
+        
+        const nodes = await Promise.all(
+            markdownFiles.map(file => parseMarkdownFile(path.join(wikiDir, file)))
+        );
+
+        return nodes.filter(node => node !== null);
+    },
+
+    async createDiagramData() {
+        const nodes = await this.getAllNodes();
+        const links = [];
+        
+        // Create links from parsed Markdown files
+        nodes.forEach(node => {
+            node.links.forEach(link => {
+                const targetFile = `${link.href}.md`;
+                if (nodes.some(n => n.id === link.href)) {
+                    links.push({
+                        source: node.id,
+                        target: link.href,
+                        label: link.text
+                    });
+                }
+            });
+        });
+
+        return { nodes, links };
+    }
 };
+
+module.exports = wikiService;
